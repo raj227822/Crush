@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For My Crush ❤️</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      background: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Floating hearts background */
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 20px;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(1); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    /* Message Box */
+    .slide {
+      display: none;
+      font-size: 2em;
+      max-width: 80%;
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(255, 0, 100, 0.7);
+      color: #fff;
+      text-align: center;
+    }
+
+    .active {
+      display: block;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    button {
+      margin: 20px;
+      padding: 15px 30px;
+      font-size: 1em;
+      border: none;
+      border-radius: 12px;
+      background: pink;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255,0,100,0.6);
+    }
+
+    .decor {
+      font-size: 2.5em;
+      color: red;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
+
+    /* Picture slide */
+    .picture-slide {
+      background: none;
+      padding: 0;
+      box-shadow: none;
+    }
+    .picture-slide img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+    }
+
+    /* Small special slide */
+    .small-slide {
+      font-size: 1.5em;
+      max-width: 300px;
+      padding: 20px;
+      background: pink;
+      color: black;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(255, 0, 100, 0.7);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div id="slides">
+  <div class="slide active">It's your special day yeye! 🎉</div>
+  <div class="slide">To make something for you, you are special to me! 💖</div>
+  <div class="slide">
+    Do you wanna see what I made?? 🤔<br>
+    <button onclick="nextSlide()">Yes</button>
+    <button onclick="nextSlide()">No</button>
+  </div>
+  <div class="slide">Have a look at it ❤️ <b>Your_Name</b> ❤️</div>
+  <!-- Picture Slide -->
+  <div class="slide picture-slide">
+    <img src="photo.jpg" alt="Special Picture">
+  </div
+  </div>
+  <div class="slide">
+    <div class="decor">💖 I Love You 💖</div>
+  </div>
+  <!-- Small Princess Slide -->
+  <div class="slide small-slide">👑 I love you,My Princess 💖</div>
+  <div class="slide">To My Love ❤️ <b>Mahima</b> ❤️</div>
+  <div class="slide">I have a message for you... 💌</div>
+  <div class="slide">I love you life long ❤️</div>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function nextSlide() {
+    slides[currentSlide].classList.remove('active');
+    currentSlide++;
+    if (currentSlide < slides.length) {
+      slides[currentSlide].classList.add('active');
+      if (slides[currentSlide].querySelector("#music")) {
+        document.getElementById("music").play();
+      }
+    }
+  }
+
+  document.body.addEventListener("click", () => {
+    if (!slides[currentSlide].querySelector("button")) {
+      nextSlide();
+    }
+  });
+
+  function createHearts() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    document.getElementById("hearts").appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }
+  setInterval(createHearts, 500);
+</script>
+
+</body>
+</html>
